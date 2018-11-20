@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Привет</title>
+</head>
+<body>
+ 
+<canvas id = "canvas" width="700" height="500" style="border: solid"></canvas>
+<canvas id = "canvas2" width="600" height="500" ></canvas>
+<img src="" id="image1">
+<img src="" id="image2">
+<img src="" id="image3">
+<img src="" id="image4">
+<img src="" id="image5">
+<img src="" id="image6">
+<img src="" id="image7">
+<img src="" id="image8">
+<img src="" id="image9">
+<img src="" id="image10">
+
+
+<script type="text/javascript" src = "draw.js"></script>
+<script type="text/javascript" src = "move.js"></script>
+<script type="text/javascript" src = "clash.js"></script>
+<script type="text/javascript" src = "key.js"></script>
+<script type="text/javascript" src = "play.js"></script>
+
+
+<script type="text/javascript">
+
+    var canvas = document.getElementById('canvas');
+	//разворачивает на полноэкранный режим по нажатию ЛКМ по полю
+    function launchFullScreen (element) {
+        if (element.requestFullScree){
+            element.requestFullScree();
+        }
+        else if (element.mozRequestFullScreen){
+            element.mozRequestFullScreen();
+        }
+        else if (element.webkitRequestFullScreen){
+            element.webkitRequestFullScreen();
+        }
+
+    }
+
+   canvas.onclick = function () {
+       launchFullScreen(canvas);
+
+   };
+    var context = canvas.getContext('2d');
+
+    
+Area();
+
+var Load = function(){
+if (!GameModule.ShowGameFlag()){
+    window.onkeydown = function (e) {
+        SetKey(e.keyCode);
+
+    };
+    window.onkeyup = function (e) {
+        clearKey(e.keyCode);
+    };
+    GameModule.GameEngine();
+    GameModule.ChangeGameFlag(true);
+    }
+    else {
+    	GameModule.NewGame();
+    }
+   
+}
+
+
+var canvas2 = document.getElementById('canvas2');
+var context2 = canvas2.getContext('2d');
+context2.font="20px Areal";
+	context2.fillStyle = "black";
+	context2.fillText('Передвижение мышки:', 10, 20);
+	context2.font="15px Areal";
+	context2.fillText('↑   - движение вверх', 20, 40);
+	context2.fillText('↓   - движение вниз', 20, 55);
+	context2.fillText('→ - движение вправо', 20, 70);
+	context2.fillText('← - движение влево', 20, 85);
+	context2.fillText('"Пробел" - новая игра', 20, 100);
+	context2.fillText('"z" - кинуть помидорку', 20, 115);
+	context2.font="20px Areal";
+	context2.fillText('Цель игры:', 10, 150);
+	context2.font="15px Areal";
+	context2.fillText('По полю разбросанны 3 кусочка сыра, необходима собрать все кусочки.', 20, 170); 
+	context2.fillText('Необходимо быть аккуратнее и не попатсть в лапы котов. Чтобы избавиться', 20, 185); 
+	context2.fillText('от кота необходимо кинуть в него помидор, нажав клавишу "Z". Вам дается', 20, 200);
+	context2.fillText('3 жизни, если все кусочки сыра собраны и остались жизни, то игра пройдена.', 20, 215);
+	context2.strokeStyle = "yellow";
+	context2.lineWidth = 1.5;
+	//context2.strokeText('you', 20, 20);
+</script>
+
+<div style="margin: 5px 0 10px 50px; display:block;">
+<button style="background: #fdeaa8; width: 100px; height: 25px; 
+border-radius: 5px;  font-size: 16px;" onclick="Load()">Новая игра</button>
+
+<button style="background: #fdeaa8; width: 65px; height: 25px; 
+border-radius: 5px;  font-size: 16px;" onclick="pause2()">Пауза</button>
+</div>
+
+
+</body>
+</html>
